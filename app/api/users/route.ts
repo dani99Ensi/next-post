@@ -39,7 +39,6 @@ export async function GET() {
 }*/
 
 import { PrismaClient } from "@prisma/client";
-import next from "next";
 import { NextResponse } from "next/server";
 
 const prisma = new PrismaClient();

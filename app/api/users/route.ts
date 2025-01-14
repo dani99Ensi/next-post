@@ -55,8 +55,8 @@ export async function GET() {
       skipDuplicates: true, // Prevent duplicate entries
     });*/
 
-    const allPets = await prisma.pets.findMany();
-    return NextResponse.json({ pets: allPets });
+    const allPops = await prisma.popusertable.findMany();
+    return NextResponse.json({ user: allPops });
   } catch (error) {
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });
   }
@@ -64,23 +64,23 @@ export async function GET() {
 
 export async function POST(request: Request) {
     try {
-      const { Name, Owner } = await request.json(); // Parse request body
+      const { first_name, last_name } = await request.json(); // Parse request body
       
-      if (!Name || !Owner) {
+      if (!first_name || !last_name) {
         return NextResponse.json(
-          { error: "Both 'Name' and 'Owner' are required fields." },
+          { error: "Both 'Name' and 'Last Name' are required fields." },
           { status: 400 }
         );
       }
   
-      const newPet = await prisma.pets.create({
+      const newpop = await prisma.popusertable.create({
         data: {
-          Name,
-          Owner,
+          first_name,
+          last_name,
         },
       });
   
-      return NextResponse.json({ petssdasd: newPet }, { status: 201 });
+      return NextResponse.json({ newUser: newpop }, { status: 201 });
     } catch (error) {
       return NextResponse.json({ error: (error as Error).message }, { status: 500 });
     }
@@ -88,15 +88,15 @@ export async function POST(request: Request) {
 
   export async function PUT(request: Request){
     try{
-      const {id,Name,Owner}= await request.json();
+      const {pop_user_id,first_name,last_name}= await request.json();
   
-      if(!id || (!Name&&!Owner)){
+      if(!pop_user_id || (!first_name&&!last_name)){
         return NextResponse.json({error:"please enter the id"},{status:400})
       }
   
-      const updatePet = await prisma.pets.update(
-        {where:{id},
-        data:{...(Name && {Name}),...(Owner && {Owner})}}
+      const updatePet = await prisma.popusertable.update(
+        {where:{pop_user_id},
+        data:{...(first_name && {first_name}),...(last_name && {last_name})}}
       )
 
       return NextResponse.json({updated:updatePet});
@@ -107,13 +107,13 @@ export async function POST(request: Request) {
 
   export async function DELETE(request: Request){
     try{
-      const id = await request.json();
-      if(!id){
+      const {pop_user_id} = await request.json();
+      if(!pop_user_id){
         return NextResponse.json({error:"please enter an id"})
       }
 
-      const deletedPet = await prisma.pets.delete({where:{id}})
-      return NextResponse.json({petDeleted:deletedPet})
+      const deletedPop = await prisma.popusertable.delete({where:{pop_user_id}})
+      return NextResponse.json({popDeleted:deletedPop})
 
     }catch(error){
       return NextResponse.json({error: (error as Error).message},{status:400});

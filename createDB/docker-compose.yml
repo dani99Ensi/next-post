@@ -1,0 +1,11 @@
+version: "3"
+services:
+  popDBservice:
+    build: ./
+    image: image_pop_db
+    container_name: container_pop_db
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - 5432:5432

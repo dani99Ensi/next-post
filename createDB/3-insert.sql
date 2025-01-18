@@ -1,7 +1,220 @@
-\c popdb
-INSERT INTO
-    popUserTable(pop_user_id,first_name,last_name)
-VALUES
-    (1,'Main','User'),
-    (2,'Willie','Nelson');
-ALTER SEQUENCE popUserTable_pop_user_id_seq RESTART WITH 3;
+-- \c popdbfirstphase
+-- INSERT INTO UserTypes (UserTypeName) VALUES
+-- ('Manager'),
+-- ('Employee'),
+-- ('Customer');
+
+-- INSERT INTO Locations (City, State) VALUES
+-- ('Montgomery', 'AL'),
+-- ('Juneau', 'AK'),
+-- ('Phoenix', 'AZ'),
+-- ('Little Rock', 'AR'),
+-- ('Sacramento', 'CA'),
+-- ('Denver', 'CO'),
+-- ('Hartford', 'CT'),
+-- ('Dover', 'DE'),
+-- ('Tallahassee', 'FL'),
+-- ('Atlanta', 'GA'),
+-- ('Honolulu', 'HI'),
+-- ('Boise', 'ID'),
+-- ('Springfield', 'IL'),
+-- ('Indianapolis', 'IN'),
+-- ('Des Moines', 'IA'),
+-- ('Topeka', 'KS'),
+-- ('Frankfort', 'KY'),
+-- ('Baton Rouge', 'LA'),
+-- ('Augusta', 'ME'),
+-- ('Annapolis', 'MD'),
+-- ('Boston', 'MA'),
+-- ('Lansing', 'MI'),
+-- ('Saint Paul', 'MN'),
+-- ('Jackson', 'MS'),
+-- ('Jefferson City', 'MO'),
+-- ('Helena', 'MT'),
+-- ('Lincoln', 'NE'),
+-- ('Carson City', 'NV'),
+-- ('Concord', 'NH'),
+-- ('Trenton', 'NJ'),
+-- ('Santa Fe', 'NM'),
+-- ('Albany', 'NY'),
+-- ('Raleigh', 'NC'),
+-- ('Bismarck', 'ND'),
+-- ('Columbus', 'OH'),
+-- ('Oklahoma City', 'OK'),
+-- ('Salem', 'OR'),
+-- ('Harrisburg', 'PA'),
+-- ('Providence', 'RI'),
+-- ('Columbia', 'SC'),
+-- ('Pierre', 'SD'),
+-- ('Nashville', 'TN'),
+-- ('Austin', 'TX'),
+-- ('Salt Lake City', 'UT'),
+-- ('Montpelier', 'VT'),
+-- ('Richmond', 'VA'),
+-- ('Olympia', 'WA'),
+-- ('Charleston', 'WV'),
+-- ('Madison', 'WI'),
+-- ('Cheyenne', 'WY');
+
+
+-- INSERT INTO Users (Username, Password, Email, UserTypeID, LocationID) VALUES
+-- ('admin_user', 'hashed_password123', 'admin@example.com', 1, 1),
+-- ('john_doe', 'hashed_password456', 'john.doe@example.com', 2, 2),
+-- ('vendor_user', 'hashed_password789', 'vendor@example.com', 3, 3),
+-- ('sarah_smith', 'hashed_password001', 'sarah.smith@example.com', 2, 4),
+-- ('michael_brown', 'hashed_password002', 'michael.brown@example.com', 2, 5),
+-- ('jessica_jones', 'hashed_password003', 'jessica.jones@example.com', 2, 6),
+-- ('william_clark', 'hashed_password004', 'william.clark@example.com', 3, 7),
+-- ('elizabeth_hall', 'hashed_password005', 'elizabeth.hall@example.com', 3, 8),
+-- ('charles_evans', 'hashed_password006', 'charles.evans@example.com', 3, 9),
+-- ('emily_davis', 'hashed_password007', 'emily.davis@example.com', 2, 10),
+-- ('daniel_miller', 'hashed_password008', 'daniel.miller@example.com', 1, 11),
+-- ('amanda_lopez', 'hashed_password009', 'amanda.lopez@example.com', 3, 12),
+-- ('robert_garcia', 'hashed_password010', 'robert.garcia@example.com', 2, 13),
+-- ('linda_robinson', 'hashed_password011', 'linda.robinson@example.com', 3, 14),
+-- ('steven_wilson', 'hashed_password012', 'steven.wilson@example.com', 2, 15);
+
+-- INSERT INTO Products (ProductName) VALUES
+-- ('Coca-Cola'),
+-- ('Diet Coca-Cola'),
+-- ('Dr Pepper'),
+-- ('Pepsi'),
+-- ('Sprite'),
+-- ('Diet-coke'),
+-- ('Mountain Dew'),
+-- ('Fanta'),
+-- ('Canada Dry Ginger Ale'),
+-- ('7-Up'),
+-- ('Sunkist'),
+-- ('Sierra Mist'),
+-- ('Lemo Lime Sprite'),
+-- ('Diet Pepsi');
+
+-- INSERT INTO Toppings (ToppingName) VALUES
+-- ('Sprinkles'),
+-- ('Hot Fudge'),
+-- ('Whipped Cream'),
+-- ('Cookie dough'),
+-- ('Cereal'),
+-- ('Marshmallow creme'),
+-- ('Graham crackers'),
+-- ('Oreos'),
+-- ('Magic Shell'),
+-- ('Maraschino cherries'),
+-- ('M&ms'),
+-- ('Fruit');
+
+-- INSERT INTO ProductAvailability (ProductID, LocationID, Qty) VALUES
+-- (1, 1, 100), -- Coca-Cola in Montgomery, AL
+-- (2, 1, 50),  -- Diet Coca-Cola in Montgomery, AL
+-- (3, 2, 75),  -- Dr Pepper in Juneau, AK
+-- (4, 3, 200), -- Pepsi in Phoenix, AZ
+-- (5, 4, 150), -- Sprite in Little Rock, AR
+-- (6, 5, 90),  -- Diet Coke in Sacramento, CA
+-- (7, 6, 120), -- Mountain Dew in Denver, CO
+-- (8, 7, 80),  -- Fanta in Hartford, CT
+-- (9, 8, 95),  -- Canada Dry Ginger Ale in Dover, DE
+-- (10, 9, 130), -- 7-Up in Tallahassee, FL
+-- (11, 10, 60), -- Sunkist in Atlanta, GA
+-- (12, 11, 50), -- Sierra Mist in Honolulu, HI
+-- (13, 12, 110), -- Lemon Lime Sprite in Boise, ID
+-- (14, 13, 70), -- Diet Pepsi in Springfield, IL
+-- (1, 14, 85), -- Coca-Cola in Indianapolis, IN
+-- (2, 15, 75), -- Diet Coca-Cola in Des Moines, IA
+-- (3, 16, 65), -- Dr Pepper in Topeka, KS
+-- (4, 17, 120), -- Pepsi in Frankfort, KY
+-- (5, 18, 200), -- Sprite in Baton Rouge, LA
+-- (6, 19, 180), -- Diet Coke in Augusta, ME
+-- (7, 20, 140), -- Mountain Dew in Annapolis, MD
+-- (8, 21, 125), -- Fanta in Boston, MA
+-- (9, 22, 100), -- Canada Dry Ginger Ale in Lansing, MI
+-- (10, 23, 90), -- 7-Up in Saint Paul, MN
+-- (11, 24, 60), -- Sunkist in Jackson, MS
+-- (12, 25, 50), -- Sierra Mist in Jefferson City, MO
+-- (13, 26, 80), -- Lemon Lime Sprite in Helena, MT
+-- (14, 27, 95), -- Diet Pepsi in Lincoln, NE
+-- (1, 28, 75), -- Coca-Cola in Carson City, NV
+-- (2, 29, 85), -- Diet Coca-Cola in Concord, NH
+-- (3, 30, 65), -- Dr Pepper in Trenton, NJ
+-- (4, 31, 100), -- Pepsi in Santa Fe, NM
+-- (5, 32, 200); -- Sprite in Albany, NY
+
+
+-- INSERT INTO ToppingAvailability (LocationID, ToppingID, Qty) VALUES
+-- (1, 1, 200), -- Sprinkles in Montgomery, AL
+-- (1, 2, 150), -- Hot Fudge in Montgomery, AL
+-- (2, 3, 100), -- Whipped Cream in Juneau, AK
+-- (3, 4, 80),  -- Cookie Dough in Phoenix, AZ
+-- (4, 5, 90),  -- Cereal in Little Rock, AR
+-- (5, 6, 70),  -- Marshmallow Creme in Sacramento, CA
+-- (6, 7, 110), -- Graham Crackers in Denver, CO
+-- (7, 8, 130), -- Oreos in Hartford, CT
+-- (8, 9, 95),  -- Magic Shell in Dover, DE
+-- (9, 10, 85), -- Maraschino Cherries in Tallahassee, FL
+-- (10, 11, 75), -- M&Ms in Atlanta, GA
+-- (11, 12, 65), -- Fruit in Honolulu, HI
+-- (12, 1, 150), -- Sprinkles in Boise, ID
+-- (13, 2, 140), -- Hot Fudge in Springfield, IL
+-- (14, 3, 130), -- Whipped Cream in Indianapolis, IN
+-- (15, 4, 100), -- Cookie Dough in Des Moines, IA
+-- (16, 5, 120), -- Cereal in Topeka, KS
+-- (17, 6, 80),  -- Marshmallow Creme in Frankfort, KY
+-- (18, 7, 90),  -- Graham Crackers in Baton Rouge, LA
+-- (19, 8, 70),  -- Oreos in Augusta, ME
+-- (20, 9, 100), -- Magic Shell in Annapolis, MD
+-- (21, 10, 85), -- Maraschino Cherries in Boston, MA
+-- (22, 11, 60), -- M&Ms in Lansing, MI
+-- (23, 12, 75), -- Fruit in Saint Paul, MN
+-- (24, 1, 100), -- Sprinkles in Jackson, MS
+-- (25, 2, 90);  -- Hot Fudge in Jefferson City, MO
+  
+
+-- INSERT INTO OrderStatuses (StatusName) VALUES
+-- ('Pending'),
+-- ('Completed'),
+-- ('Cancelled'),
+-- ('Shipped'),
+-- ('Processing');
+
+-- INSERT INTO Orders (UserID, TotalPrice, OrderStatusID) VALUES
+-- (2, 25.50, 1), -- Pending
+-- (3, 45.75, 2), -- Completed
+-- (4, 35.00, 3), -- Cancelled
+-- (5, 50.00, 4), -- Shipped
+-- (6, 29.99, 5); -- Processing
+
+-- INSERT INTO OrderDetails (OrderID, ProductID, Quantity, Price) VALUES
+-- (1, 1, 2, 20.00), 
+-- (1, 2, 1, 5.50), 
+-- (2, 3, 3, 45.75), 
+-- (3, 4, 2, 20.00), 
+-- (3, 5, 1, 15.00), 
+-- (4, 6, 4, 40.00), 
+-- (5, 7, 1, 10.00);
+
+-- INSERT INTO OrderToppings (OrderDetailID, ToppingID, Quantity, ToppingPrice) VALUES
+-- (1, 1, 1, 1.00), 
+-- (1, 2, 1, 1.50),
+-- (2, 3, 1, 0.75), 
+-- (3, 4, 2, 1.60), 
+-- (4, 5, 1, 1.20),
+-- (5, 6, 3, 2.10), 
+-- (6, 7, 2, 1.50);
+
+-- INSERT INTO ProductPriceHistory (ProductID, LocationID, EffectiveDate, Price) VALUES
+-- (1, 2, CURRENT_TIMESTAMP, 10.00),
+-- (2, 2, CURRENT_TIMESTAMP, 5.50), 
+-- (3, 2, CURRENT_TIMESTAMP, 15.25), 
+-- (4, 3, CURRENT_TIMESTAMP, 8.50),
+-- (5, 4, CURRENT_TIMESTAMP, 12.00),
+-- (6, 5, CURRENT_TIMESTAMP, 9.75),
+-- (7, 6, CURRENT_TIMESTAMP, 11.00);
+
+-- INSERT INTO ToppingPriceHistory (LocationID, ToppingID, EffectiveDate, Price) VALUES
+-- (2, 1, CURRENT_TIMESTAMP, 1.00), 
+-- (2, 2, CURRENT_TIMESTAMP, 1.50), 
+-- (2, 3, CURRENT_TIMESTAMP, 0.75), 
+-- (3, 4, CURRENT_TIMESTAMP, 1.10),
+-- (4, 5, CURRENT_TIMESTAMP, 0.90),
+-- (5, 6, CURRENT_TIMESTAMP, 1.20),
+-- (6, 7, CURRENT_TIMESTAMP, 1.40);

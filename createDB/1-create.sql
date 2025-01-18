@@ -1,3 +1,3 @@
-CREATE DATABASE popdb;
+CREATE DATABASE popdbfirstphase;
 create user popuser with password 'popUserPass' SUPERUSER;
-grant all privileges on database popdb to popuser;
+grant all privileges on database popdbfirstphase to popuser;

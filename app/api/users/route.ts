@@ -55,7 +55,7 @@ export async function GET() {
       skipDuplicates: true, // Prevent duplicate entries
     });*/
 
-    const allPops = await prisma.popusertable.findMany();
+    const allPops = await prisma.locations.findMany();
     return NextResponse.json({ user: allPops });
   } catch (error) {
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });
